@@ -595,6 +595,110 @@
       margin: 48px 0;
     }
 
+    /* ====== X POSTS SECTION ====== */
+    .xposts-section { margin-bottom: 56px; }
+
+    .xposts-person-group { margin-bottom: 40px; }
+
+    .xposts-person-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .xposts-person-icon {
+      width: 38px; height: 38px;
+      background: var(--ink);
+      color: var(--gold-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .xposts-person-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .xposts-person-role {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--light-gray);
+      margin-top: 2px;
+    }
+
+    .xposts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .xpost-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .xpost-card-header {
+      background: var(--paper-dark);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .xpost-date {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--light-gray);
+    }
+    .xpost-note {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--gray);
+      padding: 8px 16px;
+      border-bottom: 1px dashed var(--border);
+      font-style: italic;
+    }
+    .xpost-embed {
+      padding: 12px 16px;
+      min-height: 80px;
+    }
+    /* Twitter埋め込みのデフォルトmarginをリセット */
+    .xpost-embed .twitter-tweet {
+      margin: 0 !important;
+    }
+
+    .xposts-loading {
+      text-align: center;
+      padding: 40px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      color: var(--light-gray);
+    }
+    .xposts-error {
+      background: #fff5f5;
+      border: 1px solid #ffcccc;
+      border-radius: 4px;
+      padding: 16px 20px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      color: #cc0000;
+    }
+    .xpost-link-fallback {
+      display: block;
+      padding: 12px 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      color: var(--crimson);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .xpost-link-fallback:hover { text-decoration: underline; }
+
     /* ====== RESPONSIVE ====== */
     @media (max-width: 600px) {
       header { padding: 40px 20px 36px; }
@@ -863,6 +967,18 @@
 
       <hr class="section-divider">
 
+      <!-- X POSTS: 疑惑の人物たちの対応 -->
+      <div class="section-label">
+        <h2>疑惑の人物たちのこの件に対する対応</h2>
+      </div>
+      <div class="xposts-section" id="xposts-section">
+        <div class="xposts-loading" id="xposts-loading">
+          X投稿を読み込み中...
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
       <!-- OPINION -->
       <div class="opinion-section">
         <div class="section-label">
@@ -1091,6 +1207,154 @@
   <div style="margin-top:8px;">最終更新: 2026年4月24日 ／ タレコミ・情報提供は上記フォームから ／ Note連動版あり</div>
   <div style="margin-top:12px; font-size:11px; opacity:0.5;">※本ページの内容は継続的に更新されます。GitHub Pagesで常時公開。</div>
 </footer>
+
+<!-- ======================================================
+     X投稿 動的読み込みスクリプト
+     x-posts.json にURLを追加するだけで自動掲載される
+     ====================================================== -->
+<script>
+(function() {
+
+  // ─── 日付フォーマット（YYYY-MM-DD → YYYY年MM月DD日）─────────────────
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const m = iso.match(/(\d{4})-(\d{2})-(\d{2})/);
+    return m ? `${m[1]}年${m[2]}月${m[3]}日` : iso;
+  }
+
+  // ─── TwitterURLからツイートIDを抽出 ──────────────────────────────
+  function extractTweetId(url) {
+    const m = url.match(/status\/(\d+)/);
+    return m ? m[1] : null;
+  }
+
+  // ─── 人名の頭文字（アイコン用）────────────────────────────────────
+  function initial(name) {
+    return name.charAt(0);
+  }
+
+  // ─── 1枚のXポストカードHTMLを生成 ──────────────────────────────
+  function buildCard(post) {
+    const tweetId = extractTweetId(post.url);
+    const dateStr = fmtDate(post.date);
+    const note    = post.note ? `<div class="xpost-note">📌 ${post.note}</div>` : '';
+
+    // サンプル投稿（example）の場合はリンク表示にフォールバック
+    const isSample = post.url.includes('example');
+
+    const embedOrLink = isSample
+      ? `<a class="xpost-link-fallback" href="${post.url}" target="_blank" rel="noopener">
+           🔗 ${post.url}<br>
+           <span style="font-size:11px;color:#aaa;">※ 実際のURLに置き換えると埋め込み表示されます</span>
+         </a>`
+      : `<div class="xpost-embed">
+           <blockquote class="twitter-tweet" data-lang="ja" data-dnt="true">
+             <a href="${post.url}"></a>
+           </blockquote>
+         </div>`;
+
+    return `
+      <div class="xpost-card">
+        <div class="xpost-card-header">
+          <span class="xpost-date">${dateStr}</span>
+          <span style="font-size:11px;color:#aaa;">𝕏 Post</span>
+        </div>
+        ${note}
+        ${embedOrLink}
+      </div>`;
+  }
+
+  // ─── 人物ごとのグループHTMLを生成 ──────────────────────────────
+  function buildGroup(person, role, posts) {
+    const cards = posts.map(buildCard).join('\n');
+    return `
+      <div class="xposts-person-group">
+        <div class="xposts-person-header">
+          <div class="xposts-person-icon">${initial(person)}</div>
+          <div>
+            <div class="xposts-person-name">${person}</div>
+            <div class="xposts-person-role">${role}</div>
+          </div>
+        </div>
+        <div class="xposts-grid">
+          ${cards}
+        </div>
+      </div>`;
+  }
+
+  // ─── メイン処理：x-posts.json を読み込んでレンダリング ────────────
+  async function loadXPosts() {
+    const section  = document.getElementById('xposts-section');
+    const loadingEl = document.getElementById('xposts-loading');
+
+    try {
+      // キャッシュバスター付きでフェッチ
+      const res = await fetch(`x-posts.json?v=${Date.now()}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const posts = await res.json();
+
+      if (!Array.isArray(posts) || posts.length === 0) {
+        section.innerHTML = `<div class="xposts-error">x-posts.json にまだ投稿が登録されていません。</div>`;
+        return;
+      }
+
+      // 人物ごとにグルーピング（登場順を維持）
+      const groups = new Map();
+      for (const post of posts) {
+        const key = post.person;
+        if (!groups.has(key)) {
+          groups.set(key, { role: post.role || '', posts: [] });
+        }
+        groups.get(key).posts.push(post);
+      }
+
+      // HTMLを構築
+      let html = '';
+      for (const [person, { role, posts: groupPosts }] of groups) {
+        // 各グループを日付降順に並べる
+        groupPosts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        html += buildGroup(person, role, groupPosts);
+      }
+
+      section.innerHTML = html;
+
+      // Twitter Widgets.js を動的ロード（まだロードされていない場合のみ）
+      if (!window._twitterWidgetsLoaded) {
+        window._twitterWidgetsLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://platform.twitter.com/widgets.js';
+        script.async = true;
+        script.charset = 'utf-8';
+        script.onload = () => {
+          if (window.twttr && twttr.widgets) {
+            twttr.widgets.load(section);
+          }
+        };
+        document.head.appendChild(script);
+      } else if (window.twttr && twttr.widgets) {
+        twttr.widgets.load(section);
+      }
+
+    } catch (err) {
+      console.error('x-posts.json の読み込みエラー:', err);
+      section.innerHTML = `
+        <div class="xposts-error">
+          ⚠️ x-posts.json の読み込みに失敗しました。<br>
+          ファイルが存在するか・JSONの書式が正しいか確認してください。<br>
+          <small style="color:#999;">${err.message}</small>
+        </div>`;
+    }
+  }
+
+  // DOM 読み込み後に実行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadXPosts);
+  } else {
+    loadXPosts();
+  }
+
+})();
+</script>
 
 </body>
 </html>

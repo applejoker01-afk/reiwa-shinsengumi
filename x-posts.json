@@ -1,0 +1,23 @@
+[
+  {
+    "person": "山本太郎",
+    "role": "代表（活動休止中）",
+    "date": "2026-04-24",
+    "url": "https://twitter.com/yamamototaro0/status/example001",
+    "note": "秘書給与問題についての公式コメント（サンプル）"
+  },
+  {
+    "person": "大石あきこ",
+    "role": "共同代表",
+    "date": "2026-04-24",
+    "url": "https://twitter.com/oishiakiko/status/example002",
+    "note": "夫の件について（サンプル）"
+  },
+  {
+    "person": "櫛渕万里",
+    "role": "前共同代表",
+    "date": "2026-04-24",
+    "url": "https://twitter.com/kushibuchi/status/example003",
+    "note": "幽霊秘書疑惑への反応（サンプル）"
+  }
+]
