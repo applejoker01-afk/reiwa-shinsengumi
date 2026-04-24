@@ -1,0 +1,84 @@
+name: Deploy & Generate Note Draft
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  generate-note-draft:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get today's date (JST)
+        id: date
+        run: echo "today=$(TZ='Asia/Tokyo' date '+%Y年%m月%d日')" >> $GITHUB_OUTPUT
+
+      - name: Generate Note draft
+        run: |
+          cat > note-draft.txt << 'DRAFT'
+          【${{ steps.date.outputs.today }} 更新版】
+
+          # れいわ新選組の終焉──疑惑と内紛の全記録
+
+          「弱者に寄り添い、一人も取り残さない」と掲げたれいわ新選組が、いま崩壊の淵に立っています。
+
+          ## 主な疑惑まとめ
+
+          ■ 山本太郎代表
+          - 公設秘書給与を組織的に詐取していた疑惑（週刊新潮・元議員実名告発）
+          - スピード違反のオービス検知を3カ月放置、秘書に押し付け
+          - 告発者に「解決金240万円を返せ」と恫喝文書を送付
+          - 臨時総会でZoom音声のみ参加「電波が悪い」と顔を隠す
+
+          ■ 大石晃子共同代表
+          - 夫（大阪府職員）が偽名名刺で党の政策立案に関与
+          - 政治資金収支報告書に450万円の記載漏れ（自ら訂正）
+          - 臨時総会で「火炎瓶闘争を支持します」と過激発言
+
+          ■ 櫛渕万里前共同代表
+          - 公設秘書が「幽霊」疑惑──地元でも国会でも誰も見たことがない
+          - 幽霊秘書の本業は「中国人専門・不動産会社社長」、警視庁が注目
+
+          ## 党の現状
+          - 2026年衆院選: 9議席→1議席（▼220万票）
+          - 地方議員31名が反旗、臨時総会3回開催、怒号が飛び交う修羅場に
+          - 執行部vs改革派、勢力ほぼ拮抗で収拾のめどなし
+
+          ## 詳細レポートはこちら
+          👉 GitHub Pages URL（公開後に記入）
+
+          ---
+          #れいわ新選組 #山本太郎 #大石あきこ #政治とカネ #秘書給与 #内部告発
+          DRAFT
+
+      - name: Upload Note draft as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NOTE-DRAFT-${{ steps.date.outputs.today }}
+          path: note-draft.txt
+          retention-days: 30

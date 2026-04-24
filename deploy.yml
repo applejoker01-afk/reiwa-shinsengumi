@@ -1,0 +1,87 @@
+name: 24時間ごとに自動更新＆デプロイ
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 毎日 09:00 JST（UTC 00:00）
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # =========================================
+  # JOB 1: ニュース収集 → HTML更新 → コミット
+  # =========================================
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.12 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 依存パッケージインストール
+        run: pip install anthropic
+
+      - name: ニュース収集 ＆ HTML自動更新
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/auto_update.py
+
+      - name: 変更確認
+        id: check_changes
+        run: |
+          git diff --quiet && echo "changes=false" >> $GITHUB_OUTPUT || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: 変更をコミット＆プッシュ
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html UPDATE_LOG.md note-draft.txt
+          git commit -m "🤖 自動更新: $(TZ='Asia/Tokyo' date '+%Y年%m月%d日 %H:%M JST')"
+          git push
+
+      - name: Note下書きをArtifactとして保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NOTE-DRAFT-${{ github.run_number }}
+          path: note-draft.txt
+          retention-days: 14
+
+  # =========================================
+  # JOB 2: GitHub Pages デプロイ
+  # =========================================
+  deploy:
+    runs-on: ubuntu-latest
+    needs: auto-update
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: チェックアウト（最新コミットを取得）
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: GitHub Pages セットアップ
+        uses: actions/configure-pages@v4
+
+      - name: Artifactアップロード
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: GitHub Pages デプロイ
+        id: deployment
+        uses: actions/deploy-pages@v4

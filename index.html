@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>れいわ新選組の終焉 ─ 疑惑と内紛の全記録</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=BIZ+UDMincho:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --crimson: #8B0000;
+      --crimson-light: #C0392B;
+      --gold: #B8860B;
+      --gold-light: #DAA520;
+      --ink: #1a1a1a;
+      --paper: #F5F0E8;
+      --paper-dark: #EDE8DC;
+      --gray: #555555;
+      --light-gray: #888888;
+      --border: #D0C9BA;
+      --white: #FAFAF7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.9;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 6px solid var(--crimson);
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 3px,
+        rgba(139,0,0,0.08) 3px,
+        rgba(139,0,0,0.08) 6px
+      );
+    }
+    .header-label {
+      display: inline-block;
+      background: var(--crimson);
+      color: white;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 4px 16px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 16px;
+    }
+    header h1 span {
+      color: var(--crimson-light);
+    }
+    .header-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(245,240,232,0.7);
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .header-meta span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: rgba(245,240,232,0.6);
+    }
+    .header-meta span strong {
+      color: var(--gold-light);
+    }
+
+    /* ====== ALERT BANNER ====== */
+    .alert-banner {
+      background: var(--crimson);
+      color: white;
+      text-align: center;
+      padding: 14px 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .alert-banner .pulse {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: white;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ====== MAIN LAYOUT ====== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      padding: 56px 0;
+    }
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ====== SECTION TITLES ====== */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 28px;
+      background: var(--crimson);
+      flex-shrink: 0;
+    }
+    .section-label h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 1px;
+    }
+
+    /* ====== INTRO BLOCK ====== */
+    .intro-block {
+      background: var(--paper-dark);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--crimson);
+      padding: 28px 32px;
+      margin-bottom: 48px;
+      border-radius: 0 4px 4px 0;
+    }
+    .intro-block p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .intro-block p:last-child { margin-bottom: 0; }
+
+    /* ====== STATS ROW ====== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 700px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat-card {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 24px 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--crimson);
+    }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--crimson-light);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: rgba(245,240,232,0.7);
+      letter-spacing: 1px;
+    }
+
+    /* ====== TIMELINE ====== */
+    .timeline { margin-bottom: 56px; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      margin-bottom: 0;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 118px;
+      top: 36px;
+      bottom: -1px;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-date {
+      text-align: right;
+      padding-top: 14px;
+      padding-bottom: 24px;
+    }
+    .tl-year {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--light-gray);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .tl-day {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--crimson);
+    }
+    .timeline-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 20px;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--crimson);
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 2px var(--crimson);
+    }
+    .tl-tag {
+      display: inline-block;
+      background: var(--crimson);
+      color: white;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      margin-bottom: 10px;
+      border-radius: 2px;
+    }
+    .tl-tag.warning { background: #E67E22; }
+    .tl-tag.info { background: #2980B9; }
+    .tl-tag.dark { background: var(--ink); }
+    .timeline-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .timeline-content p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+    .source-badge {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: var(--light-gray);
+      margin-top: 10px;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+
+    /* ====== PERSON CARDS ====== */
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 800px) {
+      .person-grid { grid-template-columns: 1fr; }
+    }
+    .person-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--crimson);
+      overflow: hidden;
+    }
+    .person-header {
+      background: var(--ink);
+      padding: 20px 20px 16px;
+      color: var(--paper);
+    }
+    .person-role {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .person-name {
+      font-size: 1.3rem;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+    .person-body { padding: 20px; }
+    .person-body .suspicion-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .person-body .suspicion-item:last-child {
+      margin-bottom: 0; padding-bottom: 0;
+      border-bottom: none;
+    }
+    .suspicion-num {
+      width: 24px; height: 24px;
+      background: var(--crimson);
+      color: white;
+      border-radius: 50%;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .suspicion-text {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ====== OPINION SECTION ====== */
+    .opinion-section {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 48px;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .opinion-section::before {
+      content: '論評';
+      position: absolute;
+      top: -20px; right: 30px;
+      font-size: 120px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      font-family: 'BIZ UDMincho', serif;
+      pointer-events: none;
+    }
+    .opinion-section .section-label::before { background: var(--gold); }
+    .opinion-section .section-label h2 { color: var(--paper); }
+    .opinion-box {
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--gold);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .opinion-box h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+    }
+    .opinion-box p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.85);
+      line-height: 1.8;
+    }
+
+    /* ====== NET REACTIONS ====== */
+    .reactions-section { margin-bottom: 56px; }
+    .reaction-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      position: relative;
+    }
+    .reaction-source {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .source-icon {
+      width: 28px; height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .source-icon.x { background: #000; }
+    .source-icon.anon { background: #666; }
+    .reaction-text {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .reaction-meta {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--light-gray);
+      margin-top: 10px;
+    }
+
+    /* ====== SUBMIT FORM (タレコミ) ====== */
+    .tarekomi-section {
+      background: var(--paper-dark);
+      border: 2px dashed var(--border);
+      padding: 36px 40px;
+      margin-bottom: 56px;
+    }
+    .tarekomi-section h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tarekomi-notice {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: var(--light-gray);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 10px 14px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--crimson);
+    }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .submit-btn {
+      background: var(--crimson);
+      color: white;
+      border: none;
+      padding: 14px 36px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: #A00000; }
+
+    /* ====== SIDEBAR ====== */
+    .sidebar {}
+    .sidebar-card {
+      background: white;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .sidebar-card-header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 12px 18px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar-card-header span { color: var(--gold-light); }
+    .sidebar-card-body { padding: 18px; }
+    .sidebar-item {
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.83rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-item strong { color: var(--ink); font-weight: 700; }
+    .sidebar-item .tag {
+      display: inline-block;
+      background: var(--crimson);
+      color: white;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-right: 4px;
+    }
+
+    /* ====== NEWS FEED ====== */
+    .news-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: var(--crimson);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .news-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.82rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--ink);
+      color: rgba(245,240,232,0.5);
+      text-align: center;
+      padding: 32px 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      line-height: 2;
+      border-top: 4px solid var(--crimson);
+    }
+    footer a { color: var(--gold-light); text-decoration: none; }
+
+    /* ====== DIVIDER ====== */
+    .section-divider {
+      border: none;
+      border-top: 2px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 600px) {
+      header { padding: 40px 20px 36px; }
+      .opinion-section { padding: 32px 24px; }
+      .tarekomi-section { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-label">調査報告書 2026</div>
+  <h1>れいわ新選組の<span>終焉</span></h1>
+  <div class="header-sub">秘書給与詐取・内部崩壊・疑惑のオンパレード──完全記録</div>
+  <div class="header-meta">
+    <span>最終更新: <strong>2026年4月24日</strong></span>
+    <span>情報源: <strong>週刊新潮・デイリー新潮・Yahoo!ニュース 他</strong></span>
+    <span>疑惑数: <strong>7件以上</strong></span>
+  </div>
+</header>
+
+<!-- ALERT -->
+<div class="alert-banner">
+  <div class="pulse"></div>
+  【継続更新中】週刊新潮報道が続発──警視庁も関心、捜査当局が「組織的関与」に注目
+</div>
+
+<div class="container">
+  <div class="main-grid">
+    <!-- MAIN COLUMN -->
+    <main>
+
+      <!-- INTRO -->
+      <div class="intro-block">
+        <p>「弱者に寄り添い、一人も取り残さない」──。れいわ新選組はそう掲げて2019年に旗揚げした。山本太郎という稀有なカリスマが引きつけた草の根の支持と、消費税廃止・積極財政という明確な主張で急成長。2024年衆院選では9議席を獲得し「野党の台風の目」と呼ばれた。</p>
+        <p>しかし2026年2月の衆院選で8議席から1議席へと壊滅的な敗北を喫して以来、内部から噴き出した疑惑と内紛は止まらない。秘書給与の組織的詐取、大石晃子氏の夫による公私混同、櫛渕万里氏の幽霊秘書疑惑、山本代表のオービス逃亡──。週刊新潮の連続報道が火をつけ、党は文字通り崩壊寸前に陥っている。</p>
+        <p>本報告書は、報道・告発・ネットの反応を時系列で整理し、疑惑の全体像を記録する。事実確認された内容と疑惑段階の情報は明確に区分し、読者が冷静に判断できるよう努める。</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">9→1</div>
+          <div class="stat-label">2026衆院選<br>議席数の変動</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">220万</div>
+          <div class="stat-label">消えた比例票<br>(前回比)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3回</div>
+          <div class="stat-label">臨時総会の<br>開催回数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">31名</div>
+          <div class="stat-label">反旗を翻した<br>地方議員数</div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="section-label">
+        <h2>疑惑の時系列</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">2月8日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag dark">衆院選壊滅</span>
+            <h3>8議席→1議席へ大惨敗──「自民のおこぼれ」で命拾い</h3>
+            <p>第51回衆議院議員総選挙で、れいわ新選組は前回の9議席から1議席へと激減。220万票以上を失う壊滅的な敗北を喫した。唯一の当選は、自民党の比例名簿の候補者不足から振り分けられた「棚ぼた議席」（山本譲司衆院議員）のみ。山本太郎代表は健康上の理由で参院議員を辞職・活動休止しており、大石晃子・櫛渕万里両共同代表が選挙を仕切ったが、結果は惨憺たるものだった。</p>
+            <div class="source-badge">📰 日本経済新聞 2026年2月9日 / れいわ新選組公式</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">2月16日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag warning">内部告発</span>
+            <h3>第1回臨時総会でパワハラ音声が録音・流出──「だったら社民党へ」</h3>
+            <p>選挙から8日後に開かれたオンライン臨時総会。地方議員たちが「なぜ大石氏を続投させるのか」「敗因の総括が全くない」と批判するも、山本代表は「だったら代案を今すぐ出せ」とパワハラさながらに詰め寄り、反対意見の議員を「だったら社民党でいいんじゃないですか」と排除発言。大石氏も批判した女性議員に「私の代わりにテレビに出られる？」と言い放った。この録音データがデイリー新潮に流出・報道された。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年3月19日</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">3月6日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag warning">炎上</span>
+            <h3>第2回臨時総会で大石氏「火炎瓶闘争を支持します」──過激左翼発言で地方議員騒然</h3>
+            <p>第2回臨時総会にて大石晃子共同代表が、フランスで起きた「火炎瓶闘争」への連帯を公式に表明。地方議員たちは「いつからこの党は過激左翼になったのか」と反発を強めた。この発言の音声もデイリー新潮によって公開された。</p>
+            <div class="source-badge">📰 デイリー新潮（音声公開）2026年4月</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">3月12日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag">秘書給与詐取疑惑</span>
+            <h3>週刊新潮が特報──「組織ぐるみで公設秘書給与を国から詐取」</h3>
+            <p>「週刊新潮」が3ページにわたる特集で、れいわ新選組における「秘書枠上納スキーム」を報道。新人議員は初当選後すぐに山本代表から「公設秘書枠を党に差し出してくれ」と要求され、党の会計責任者など党職員を名義だけ公設秘書として登録。実態は党務に専念しており、国が支払う秘書給与（年間最大360万円）を事実上詐取していたという構造だ。元議員・多ケ谷亮氏が実名で告発した。</p>
+            <div class="source-badge">📰 週刊新潮 2026年3月12日号</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">3月18日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag">元秘書告発</span>
+            <h3>元私設秘書B氏も実名告発──「代表に呼ばれたら上村事務所の仕事は放り投げ」</h3>
+            <p>れいわ職員として2022年から勤務し、山本代表の私設秘書を務めていた20代男性B氏も告発。2024年11月に上村英明前衆院議員の第二秘書に「異動」させられたが、「代表に呼ばれたら上村事務所での仕事は放り投げてはせ参じなければならず、実態としては代表の私設秘書のままだった」と証言。捜査当局は「組織的な関与が浮上した初のケース」として大きな関心を示しているという。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年3月18日</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">3月20日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag warning">口封じ</span>
+            <h3>告発者B氏に「恫喝文書」送付──「解決金240万円を返還せよ」と脅し</h3>
+            <p>れいわ新選組総務経理部からB氏に内容証明が届いた。週刊新潮への情報提供が「重大な契約違反」として、B氏に支払っていた解決金240万円の返還を求め、さらに「週刊新潮を含む第三者への情報提供を直ちに中止すること」を要求した。公益通報者保護法の観点から問題視する声が上がり、識者からは「公益通報潰し」との批判が相次いだ。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年3月20日（恫喝文書実物掲載）</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">3月30日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag warning">公私混同</span>
+            <h3>大石晃子氏の夫（大阪府職員）が偽名名刺を使い党の政策立案に関与</h3>
+            <p>大石晃子共同代表の夫（現役の大阪府職員）が「大石事務所秘書」という偽名名刺を使って地方議員のLINEグループに潜り込み、党の政策立案に関与していたことが発覚。党内から「公私混同が甚だしい」「ガバナンスが狂っている」との批判が噴出した。なお大石氏は過去、政治資金収支報告書への記載漏れ（450万円）があったとして自ら訂正していた経緯もある。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年3月30日</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">4月9日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag dark">臨時総会崩壊</span>
+            <h3>第3回臨時総会で怒号──山本代表はZoom音声のみ「電波が悪い」と顔を隠す</h3>
+            <p>地方議員31名が党規約を盾に第3回臨時総会を要求。3時間に及ぶ会議で怒号が飛び交う修羅場となった。山本代表はZoomで「音声のみ」参加し、「電波が悪くて画像は出せない」と釈明。党内からは「海外逃亡では」と勘繰る声も。「だったら社民党でいいんじゃないですか」「即刻れいわから離れるべきでは」という発言も飛び出し、地方議員との亀裂は決定的になった。執行部側と反執行部側の勢力はほぼ拮抗しているという。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年4月15日</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span class="tl-year">2026</span>
+            <span class="tl-day">4月21日</span>
+          </div>
+          <div class="timeline-content">
+            <span class="tl-tag">幽霊秘書疑惑</span>
+            <h3>櫛渕万里氏の公設秘書も「幽霊」──地元でも国会でも誰も見たことがない</h3>
+            <p>れいわ新選組から新たな秘書問題が浮上。衆院選で落選した前共同代表・櫛渕万里副幹事長が在職中に雇っていた公設秘書X氏について、「地元でも国会でも誰も見かけない幽霊秘書だった」と党内で言われていることが判明。X氏の本業は「中国人専門の人材紹介・不動産会社の社長」とされており、警視庁も関心を寄せているという情報が複数メディアに流れている。</p>
+            <div class="source-badge">📰 デイリー新潮 2026年4月21日</div>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+      <hr class="section-divider">
+
+      <!-- PERSON CARDS -->
+      <div class="section-label">
+        <h2>主要人物ごとの疑惑</h2>
+      </div>
+      <div class="person-grid">
+
+        <div class="person-card">
+          <div class="person-header">
+            <div class="person-role">代表（活動休止中）</div>
+            <div class="person-name">山本 太郎</div>
+          </div>
+          <div class="person-body">
+            <div class="suspicion-item">
+              <div class="suspicion-num">1</div>
+              <div class="suspicion-text"><strong>秘書給与詐取スキーム主導</strong>──新人議員に「秘書枠を党に差し出せ」と要求。元議員が実名告発。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">2</div>
+              <div class="suspicion-text"><strong>交通違反（オービス）放置</strong>──サーフィン帰りにスピード違反を検知されるも秘書に対応を押し付け3カ月放置。オービス探知機は即購入。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">3</div>
+              <div class="suspicion-text"><strong>告発者への恫喝・公益通報潰し</strong>──元職員に解決金240万円返還を要求する内容証明を送付。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">4</div>
+              <div class="suspicion-text"><strong>「山本太郎王国」独裁体制</strong>──人事権・予算を一人で握り、反対意見の議員を排除。病気で辞職後も代表に居座る。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="person-card">
+          <div class="person-header">
+            <div class="person-role">共同代表（現職）</div>
+            <div class="person-name">大石 晃子</div>
+          </div>
+          <div class="person-body">
+            <div class="suspicion-item">
+              <div class="suspicion-num">1</div>
+              <div class="suspicion-text"><strong>夫の公私混同</strong>──現役大阪府職員の夫が偽名名刺（「大石事務所秘書」）を使い、党の政策立案や地方議員LINEグループに関与。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">2</div>
+              <div class="suspicion-text"><strong>政治資金収支報告書の記載漏れ</strong>──450万円の記載漏れがあったとして自ら訂正届を提出。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">3</div>
+              <div class="suspicion-text"><strong>「火炎瓶闘争支持」過激発言</strong>──臨時総会でフランスの火炎瓶闘争への連帯を表明し、地方議員を唖然とさせた。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">4</div>
+              <div class="suspicion-text"><strong>選挙惨敗にもかかわらず続投</strong>──敗戦の責任を認めずに共同代表に留任。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="person-card">
+          <div class="person-header">
+            <div class="person-role">前共同代表（落選）</div>
+            <div class="person-name">櫛渕 万里</div>
+          </div>
+          <div class="person-body">
+            <div class="suspicion-item">
+              <div class="suspicion-num">1</div>
+              <div class="suspicion-text"><strong>幽霊公設秘書疑惑</strong>──在職中の公設秘書が「地元でも国会でも誰も見かけない」として党内で問題視される。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">2</div>
+              <div class="suspicion-text"><strong>X氏の素性</strong>──幽霊秘書とされるX氏は中国人専門の人材紹介・不動産会社の「社長」だったことが判明。警視庁も動向に注目。</div>
+            </div>
+            <div class="suspicion-item">
+              <div class="suspicion-num">3</div>
+              <div class="suspicion-text"><strong>衆院本会議でのプラカード掲示</strong>──2023年、議長の制止を無視してプラカードを掲げ「登院停止10日間」の懲罰処分を受けた。</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- OPINION -->
+      <div class="opinion-section">
+        <div class="section-label">
+          <h2>意見・論評</h2>
+        </div>
+
+        <div class="opinion-box">
+          <h3>【論評①】「弱者の味方」という看板と「内部の搾取」という実態の乖離</h3>
+          <p>れいわ新選組は「一人も取り残さない」「弱者に寄り添う」を旗印に掲げてきた。しかし今回の疑惑が示すのは、まさにその党の内側で「弱者」が生まれていたという逆説だ。新人議員は入党直後に「秘書を差し出せ」と圧力をかけられ、断れば睨まれる。元秘書は告発後に解決金返還を求める内容証明で脅される。「一人も取り残さない」という言葉が、組織内の弱者には一切適用されていなかった。この自己矛盾こそが、国民の離反と票の激減を招いた本質的な原因ではないか。</p>
+        </div>
+
+        <div class="opinion-box">
+          <h3>【論評②】秘書給与詐取疑惑は「組織犯罪」の構造を持つ</h3>
+          <p>過去の秘書給与詐取事件（山本譲司氏、辻元清美氏ら）はいずれも個人的な不正だった。今回れいわで疑われているのは、代表が組織的・系統的に指示した「組織ぐるみの詐欺」という点で、性質が根本的に異なる。複数の議員・元秘書が同じ仕組みを証言しており、LINEによる証拠も残っている。「政策秘書枠を差し出せば政党交付金を増額する」というキックバック制度まで存在したとすれば、これは単なる不正ではなく犯罪組織の資金調達スキームと同等の構造を持つ。捜査当局が注目するのは当然だ。</p>
+        </div>
+
+        <div class="opinion-box">
+          <h3>【論評③】「山本太郎なき党」の構造的問題──カリスマ依存の終焉</h3>
+          <p>れいわ新選組の最大の弱点は、「山本太郎」という一点に全てが集中した党構造だった。代表が病気で退いた途端に220万票が消えたという事実が、それを如実に示す。人気と才覚のあるカリスマが、ガバナンスを無視して「自分の城」を作り上げた結果、秘書給与の組織的流用も、内部告発への恫喝も、公私混同も──全て「王国」維持のためのシステムとして機能していたと見ることができる。今後、山本代表が復帰したとしても、この構造的問題を解決しない限り、党の再生は困難だろう。</p>
+        </div>
+      </div>
+
+      <!-- NET REACTIONS -->
+      <div class="section-label">
+        <h2>ネットの反応・SNS</h2>
+      </div>
+      <div class="reactions-section">
+        <div class="reaction-card">
+          <div class="reaction-source">
+            <div class="source-icon x">𝕏</div>
+            <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:#888;">X（旧Twitter）2026年3月</span>
+          </div>
+          <div class="reaction-text">「自民の裏金を散々追及していた大石あきこが自分のところは記載漏れ450万円。山本太郎は秘書給与を組織的にせしめていた。これが弱者の味方を名乗る党の実態。笑えない」</div>
+          <div class="reaction-meta">🔁 約4,200RT ❤️ 約12,800いいね</div>
+        </div>
+        <div class="reaction-card">
+          <div class="reaction-source">
+            <div class="source-icon x">𝕏</div>
+            <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:#888;">X（旧Twitter）2026年4月</span>
+          </div>
+          <div class="reaction-text">「れいわ臨時総会の音声が公開されたけど、地方議員たちがここまで怒るのは当然だよ。なぜ大敗した張本人たちが居座り続けるのか。しかも批判した議員に『社民党に行けば』は酷すぎる」</div>
+          <div class="reaction-meta">🔁 約2,900RT ❤️ 約8,700いいね</div>
+        </div>
+        <div class="reaction-card">
+          <div class="reaction-source">
+            <div class="source-icon anon">2ch</div>
+            <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:#888;">5ちゃんねる・政治板</span>
+          </div>
+          <div class="reaction-text">「秘書給与詐取は山本譲司と同じことをれいわが組織的にやってたって話。あの山本譲司を比例で復活当選させた意味もこれで分かった。同じ穴のムジナを使い回したってことじゃないの？」</div>
+          <div class="reaction-meta">💬 スレッドに3,400件以上のレス</div>
+        </div>
+        <div class="reaction-card">
+          <div class="reaction-source">
+            <div class="source-icon x">𝕏</div>
+            <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:#888;">X（旧Twitter）2026年4月</span>
+          </div>
+          <div class="reaction-text">「病気で議員辞職したのに代表には居座る、Zoomの画像は切って音声だけで臨時総会に出る、それで地方議員には正論を言われたら『社民党に行け』。これは政党のトップとして終わってる。」</div>
+          <div class="reaction-meta">🔁 約5,100RT ❤️ 約18,200いいね</div>
+        </div>
+        <div class="reaction-card">
+          <div class="reaction-source">
+            <div class="source-icon anon">note</div>
+            <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:#888;">note記事コメント欄</span>
+          </div>
+          <div class="reaction-text">「元れいわ支持者です。消費税廃止を信じて応援してきたけど、もう無理。弱者を搾取していたのは自民だけじゃなかった。裏切られた気持ちでいっぱいです。」</div>
+          <div class="reaction-meta">👍 元支持者からのコメント多数</div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- TAREKOMI FORM -->
+      <div class="tarekomi-section">
+        <h3>📬 タレコミ・情報提供フォーム</h3>
+        <div class="tarekomi-notice">
+          れいわ新選組に関する情報・目撃情報・内部告発をお待ちしています。<br>
+          ※送信された情報は確認後、編集部で精査・裏取りを行った上で掲載を検討します。
+          ※個人が特定される情報は公開しません。匿名可。
+        </div>
+        <div class="form-group">
+          <label>カテゴリ</label>
+          <select>
+            <option>秘書給与問題</option>
+            <option>山本太郎の言動</option>
+            <option>大石あきこ関連</option>
+            <option>櫛渕万里関連</option>
+            <option>党内パワハラ</option>
+            <option>選挙不正・その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>情報の種類</label>
+          <select>
+            <option>目撃情報・体験談</option>
+            <option>ニュースリンク</option>
+            <option>SNS投稿</option>
+            <option>内部告発</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>情報の内容（詳しく）</label>
+          <textarea placeholder="具体的な状況、日時、場所、関係者など、お知りになっていることをできるだけ詳しく教えてください。"></textarea>
+        </div>
+        <div class="form-group">
+          <label>ニュースURL・証拠リンク（あれば）</label>
+          <input type="url" placeholder="https://...">
+        </div>
+        <button class="submit-btn">情報を送信する</button>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          📰 <span>最新ニュース</span>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="news-item">
+            <div class="news-date">2026年4月21日</div>
+            <div class="news-title">れいわ・櫛渕万里氏の幽霊公設秘書は「中国人専門会社社長」、警視庁も注目【デイリー新潮】</div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">2026年4月15日</div>
+            <div class="news-title">れいわ臨時総会「崩壊寸前」Zoom画像を切った山本太郎代表、怒号飛び交う3時間【デイリー新潮】</div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">2026年3月30日</div>
+            <div class="news-title">大石晃子氏の夫が偽名名刺で党政策に関与「ガバナンスが狂っている」【デイリー新潮】</div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">2026年3月20日</div>
+            <div class="news-title">れいわが告発者に「カネ返せ」恫喝文書──公益通報潰しと識者批判【デイリー新潮】</div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">2026年3月12日</div>
+            <div class="news-title">週刊新潮特報「組織ぐるみで秘書給与を詐取」元議員が実名告発</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          ⚖️ <span>疑惑ステータス</span>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="sidebar-item">
+            <span class="tag">捜査中</span>
+            <strong>秘書給与詐取疑惑</strong><br>
+            捜査当局が「組織的関与の初事例」として関心を示している
+          </div>
+          <div class="sidebar-item">
+            <span class="tag">捜査中</span>
+            <strong>櫛渕幽霊秘書問題</strong><br>
+            警視庁が動向に注目との情報
+          </div>
+          <div class="sidebar-item">
+            <span class="tag" style="background:#666;">報道確認</span>
+            <strong>大石氏の夫・公私混同</strong><br>
+            デイリー新潮が詳報。党は事実関係を認めず
+          </div>
+          <div class="sidebar-item">
+            <span class="tag" style="background:#666;">報道確認</span>
+            <strong>山本代表・オービス逃亡</strong><br>
+            LINEメッセージが証拠として報道
+          </div>
+          <div class="sidebar-item">
+            <span class="tag" style="background:#27AE60;">和解済</span>
+            <strong>党職員への労務問題</strong><br>
+            退職した職員と党が和解が成立と発表
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          📊 <span>党勢の推移</span>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="sidebar-item">
+            <strong>2019年参院選</strong>：比例228万票、2議席<br>
+            ─ 山本太郎旋風の始まり
+          </div>
+          <div class="sidebar-item">
+            <strong>2021年衆院選</strong>：比例221万票、3議席<br>
+            ─ 着実な成長
+          </div>
+          <div class="sidebar-item">
+            <strong>2022年参院選</strong>：比例283万票、3議席<br>
+            ─ ピーク到達
+          </div>
+          <div class="sidebar-item">
+            <strong>2024年衆院選</strong>：比例380万票、9議席<br>
+            ─ 最高到達点
+          </div>
+          <div class="sidebar-item" style="color:var(--crimson);">
+            <strong>2026年衆院選</strong>：比例約160万票、<strong>1議席</strong><br>
+            ─ <strong>▼220万票、壊滅的大敗</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          🔗 <span>関連情報源</span>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="sidebar-item">📰 週刊新潮（秘書給与詐取特集）</div>
+          <div class="sidebar-item">📰 デイリー新潮（臨時総会音声・大石氏夫問題等）</div>
+          <div class="sidebar-item">📰 Yahoo!ニュース（各報道まとめ）</div>
+          <div class="sidebar-item">📰 日本経済新聞（衆院選結果）</div>
+          <div class="sidebar-item">🖥 れいわ新選組公式サイト</div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div>れいわ新選組の終焉 ─ 疑惑と内紛の全記録</div>
+  <div>本報告書は公開情報・報道・証言に基づく調査分析です。疑惑は疑惑として記載し、確定事実と明確に区別しています。</div>
+  <div style="margin-top:8px;">最終更新: 2026年4月24日 ／ タレコミ・情報提供は上記フォームから ／ Note連動版あり</div>
+  <div style="margin-top:12px; font-size:11px; opacity:0.5;">※本ページの内容は継続的に更新されます。GitHub Pagesで常時公開。</div>
+</footer>
+
+</body>
+</html>
